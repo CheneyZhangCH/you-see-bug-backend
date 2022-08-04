@@ -35,7 +35,7 @@ console.log('process.argv', process.argv);
           synchronize,
         } = configService.get('db');
 
-        const params = {
+        return {
           type,
           host,
           port: Number(port),
@@ -43,10 +43,9 @@ console.log('process.argv', process.argv);
           password: NODE_ENV !== 'local' ? args['p'] : password,
           database,
           entities: [entities],
-          synchronize: synchronize === '1' ? true : false,
+          synchronize: false,
+          autoLoadEntities: true,
         };
-        console.log('params', params);
-        return params;
       },
     }),
     UserModule,

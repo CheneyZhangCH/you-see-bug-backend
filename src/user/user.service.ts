@@ -13,7 +13,7 @@ export class UserService {
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
-    user.userName = createUserDto.username;
+    user.userName = createUserDto.userName;
     user.password = createUserDto.password;
     user.phone = createUserDto.phone;
     user.role = createUserDto.role;

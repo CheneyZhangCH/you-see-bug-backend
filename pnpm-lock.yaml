@@ -19,6 +19,7 @@ specifiers:
   class-transformer: ^0.5.1
   class-validator: ^0.13.2
   cross-env: ^7.0.3
+  dotenv: ^16.0.1
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
@@ -46,6 +47,7 @@ dependencies:
   '@nestjs/typeorm': 9.0.0_nrd3i4im7ntbsgy2adf6sdtr44
   class-transformer: 0.5.1
   class-validator: 0.13.2
+  dotenv: 16.0.1
   mysql2: 2.3.3
   reflect-metadata: 0.1.13
   rimraf: 3.0.2

@@ -19,6 +19,9 @@ export class User {
   password: string;
 
   @Column()
+  name: string;
+
+  @Column()
   phone: string;
 
   @Column({ default: 'user' })
