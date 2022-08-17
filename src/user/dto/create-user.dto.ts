@@ -12,8 +12,12 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty({ description: '姓名' })
-  @MaxLength(20)
+  @IsString()
   name: string;
+
+  @ApiProperty({ description: '性别' })
+  @IsString()
+  gender: string;
 
   @ApiProperty({ description: '手机号码' })
   @IsString()

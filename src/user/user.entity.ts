@@ -22,6 +22,9 @@ export class User {
   name: string;
 
   @Column()
+  gender: string;
+
+  @Column()
   phone: string;
 
   @Column({ default: 'user' })

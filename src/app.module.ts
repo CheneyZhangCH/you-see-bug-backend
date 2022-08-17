@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Logger } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -24,16 +24,8 @@ console.log('process.argv', process.argv);
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const {
-          type,
-          host,
-          port,
-          username,
-          password,
-          database,
-          entities,
-          synchronize,
-        } = configService.get('db');
+        const { type, host, port, username, password, database, entities } =
+          configService.get('db');
 
         return {
           type,
