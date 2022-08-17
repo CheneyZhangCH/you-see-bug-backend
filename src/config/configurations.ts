@@ -9,7 +9,7 @@ const databaseConfig = () => {
       database: process.env.TYPEORM_DATABASE,
       entities: process.env.TYPEORM_ENTITIES,
       migrations: process.env.TYPEORM_MIGRATIONS,
-      synchronize: process.env.TYPEORM_SYNCHRONIZE,
+      synchronize: false,
     },
     redis: {
       host: process.env.REDIS_HOST,
