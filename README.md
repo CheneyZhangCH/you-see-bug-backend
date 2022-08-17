@@ -1,73 +1,50 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## 本地开发环境
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+假设大家使用 macOS 开发，Linux 和 Windows 环境自行参考。
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 依赖列表
 
-## Description
+本项目的外部服务依赖有：
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 数据库：MySQL
 
-## Installation
+### MySQL 5.7
 
 ```bash
-$ npm install
+$ brew install mysql@5.7
+$ brew services start mysql
 ```
-
-## Running the app
 
 ```bash
-# development
-$ npm run start
+# 登录数据库
+mysql -u root
 
-# watch mode
-$ npm run start:dev
+> use mysql;
+> update user set plugin='mysql_native_password' where user='root';
+> quit;
 
-# production mode
-$ npm run start:prod
+# 重启 MySQL
+brew services restart mysql
 ```
 
-## Test
+### 添加.env.local
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+在根目录下添加 .env.local文件
+```env
+TYPEORM_CONNECTION=your_database_type_ig_mysql
+TYPEORM_DATABASE=your_database
+TYPEORM_HOST=127.0.0.1_or_your_remote_ip
+TYPEORM_PORT=your_port
+TYPEORM_USERNAME=your_username
+TYPEORM_PASSWORD=your_password
+TYPEORM_ENTITIES=dist/**/*.entity{.ts,.js}
+TYPEORM_MIGRATIONS=dist/db/migrations/*.js
+TYPEORM_MIGRATIONS_DIR=dist/db/migrations
 ```
+### mysql初始化
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+typeorm migration 初始化mysql
+note: 本项目禁用了typeorm synchronize， 具体原因请自行google
+```shell
+pnpm migration:run:full:local
+```
