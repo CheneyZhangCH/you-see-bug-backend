@@ -6,10 +6,11 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('用户模块')
 @Controller('user')

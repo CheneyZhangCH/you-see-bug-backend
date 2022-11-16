@@ -1,7 +1,10 @@
-import { Module, Logger } from '@nestjs/common';
-import { UserModule } from './user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { LoggerModule } from 'nestjs-pino';
+
+import { UserModule } from './user/user.module';
 import databaseConfig from './config/configurations';
 
 const { NODE_ENV } = process.env;
@@ -19,6 +22,15 @@ console.log('process.argv', process.argv);
     ConfigModule.forRoot({
       load: [databaseConfig],
       envFilePath: `.env.${NODE_ENV}`,
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        // @TODO： 待拓展， 不同level日志需要分开储存
+        transport:
+          process.env.NODE_ENV === 'local'
+            ? { target: 'pino-pretty' }
+            : undefined,
+      },
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
