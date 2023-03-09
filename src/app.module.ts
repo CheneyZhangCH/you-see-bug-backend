@@ -16,6 +16,7 @@ process.argv.forEach((arg) => {
   }
 });
 console.log('process.argv', process.argv);
+console.log('process.argv', args);
 
 @Module({
   imports: [

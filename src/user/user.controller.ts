@@ -11,6 +11,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { HttpException } from '@nestjs/common';
 
 @ApiTags('用户模块')
 @Controller('user')
@@ -26,6 +27,7 @@ export class UserController {
   @ApiOperation({ summary: '查询所有用户' })
   @Get()
   findAll(): Promise<User[]> {
+    // throw new HttpException('系统内部异常', 500);
     return this.userService.findAll();
   }
 
